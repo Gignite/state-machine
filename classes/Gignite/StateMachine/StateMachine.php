@@ -51,8 +51,8 @@ abstract class StateMachine {
 
 	public function update($new_state)
 	{
+		$new_state     = $this->state($new_state);
 		$current_state = $this->current();
-		$new_state = $this->state($new_state);
 		
 		if ( ! $this->valid_transition())
 		{
