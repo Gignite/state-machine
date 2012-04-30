@@ -2,4 +2,4 @@
 
 namespace Gignite\StateMachine;
 
-class InvalidStateChangeException extends Exception {}
+class InvalidStateTransitionException extends Exception {}
