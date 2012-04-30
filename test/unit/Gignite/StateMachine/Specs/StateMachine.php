@@ -121,4 +121,99 @@ class StateMachine extends \PHPUnit_Framework_TestCase {
 		$this->assertSame('default', $stateMachine->current()->name());
 	}
 
+	public function provideValidSwitchStateChanges()
+	{
+		return array(
+			array('on',  'off'),
+			array('off', 'on'),
+			array('off', 'destroyed'),
+			array('on',  'destroyed'),
+		);
+	}
+
+	/**
+	 * @dataProvider  provideValidSwitchStateChanges
+	 */
+	public function testItShouldChangeStateWhenCanChangeFromValid(
+		$startState,
+		$updateState)
+	{
+		$stateMachine = new \Gignite\StateMachine\Mocks\SwitchStateMachine;
+		$stateMachine->state = $startState;
+		$stateMachine->update($updateState);
+		$this->assertSame($updateState, $stateMachine->current()->name());
+	}
+
+	public function provideInvalidSwitchStateChanges()
+	{
+		return array(
+			array('destroyed', 'off'),
+			array('destroyed', 'on'),
+			array('destroyed', 'destroyed'),
+			array('off', 'off'),
+			array('on',  'on'),
+		);
+	}
+
+	/**
+	 * @dataProvider       provideInvalidSwitchStateChanges
+	 * @expectedException  Gignite\StateMachine\InvalidStateTransitionException
+	 */
+	public function testItShouldThrowExceptionWhenCannotChangeFromValid(
+		$startState,
+		$updateState)
+	{
+		$stateMachine = new \Gignite\StateMachine\Mocks\SwitchStateMachine;
+		$stateMachine->state = $startState;
+		$stateMachine->update($updateState);
+	}
+
+	public function provideValidMethodCalls()
+	{
+		return array(
+			array('undead',     'eat_flesh'),
+			array('born',       'walk'),
+			array('undead',     'walk'),
+			array('born',       'share_worldly_experience'),
+			array('dead',       'share_worldly_experience'),
+			array('undead',     'share_worldly_experience'),
+			array('super_dead', 'share_worldly_experience'),
+			array('unborn',     'beat_heart'),
+			array('born',       'beat_heart'),
+		);
+	}
+
+	/**
+	 * @dataProvider  provideValidMethodCalls
+	 */
+	public function testItShouldNotThrowExceptionDuringValidStates(
+		$startState,
+		$method)
+	{
+		$stateMachine = $this->stateMachine($startState);
+		$this->assertNull($stateMachine->{$method}());
+	}
+
+	public function provideInvalidMethodCalls()
+	{
+		return array(
+			array('unborn',  'eat_flesh'),
+			array('unborn',  'walk'),
+			array('unborn',  'share_worldly_experience'),
+			array('dead',    'beat_heart'),
+		);
+	}
+
+	/**
+	 * @dataProvider       provideInvalidMethodCalls
+	 * @expectedException  Gignite\StateMachine\InvalidStateException
+	 */
+	public function testItShouldThrowExceptionDuringInvalidStates(
+		$startState,
+		$method)
+	{
+		$stateMachine = $this->stateMachine($startState);
+		$this->assertNull($stateMachine->{$method}());
+	}
+
 }

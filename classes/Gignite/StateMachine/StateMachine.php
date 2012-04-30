@@ -85,9 +85,29 @@ abstract class StateMachine {
 		$this->log[] = array(time(), $name);
 	}
 
+	protected function is($state)
+	{
+		if (is_array($state))
+		{
+			$current_state = $this->current()->name();
+
+			foreach ($state as $_state)
+			{
+				if ($current_state === $_state)
+				{
+					return TRUE;
+				}
+			}
+
+			return FALSE;
+		}
+
+		return $this->current() === $this->state($state);
+	}
+
 	public function assert($state)
 	{
-		if ($this->state($state) !== $state)
+		if ( ! $this->is($state))
 		{
 			throw new InvalidStateException;
 		}
@@ -95,7 +115,7 @@ abstract class StateMachine {
 
 	public function assertNot($state)
 	{
-		if ($this->state($state) === $state)
+		if ($this->is($state))
 		{
 			throw new InvalidStateException;
 		}

@@ -44,30 +44,28 @@ class HumanStateMachine extends \Gignite\StateMachine\StateMachine {
 				'final' => TRUE,
 			)),
 		);
-		return array(
-			new State('unborn', array('start' => TRUE)),
-
-			new State('born', array(
-				'from' => array('unborn'),
-			)),
-
-			new State('dead', array(
-				'from' => array('born'),
-			)),
-
-			new State('undead', array(
-				'from' => array('dead'),
-			)),
-
-			new State('super_dead', array(
-				'from'  => array('dead', 'undead'),
-				'final' => TRUE,
-			)),
-		);
 	}
 
 	public $state;
 
+	public function eat_flesh()
+	{
+		$this->assert('undead');
+	}
 
+	public function walk()
+	{
+		$this->assert(array('born', 'undead'));
+	}
+
+	public function share_worldly_experience()
+	{
+		$this->assertNot('unborn');
+	}
+
+	public function beat_heart()
+	{
+		$this->assertNot(array('dead', 'undead', 'super_dead'));
+	}
 
 }
