@@ -33,20 +33,15 @@ abstract class StateMachine {
 		throw new UnknownStateException;
 	}
 
-	public function current()
-	{
-		return $this->state($this->state);
-	}
-
-	public function log()
-	{
-		return $this->log;
-	}
-
 	protected function valid_transition($current_state, $new_state)
 	{
 		return $current_state->can_change_to($new_state)
 			OR $new_state->can_change_from($current_state);
+	}
+
+	public function current()
+	{
+		return $this->state($this->state);
 	}
 
 	public function update($new_state)
@@ -77,6 +72,11 @@ abstract class StateMachine {
 		{
 			throw new InvalidStateException;
 		}
+	}
+
+	public function log()
+	{
+		return $this->log;
 	}
 
 }
