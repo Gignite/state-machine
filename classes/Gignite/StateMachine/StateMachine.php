@@ -43,7 +43,7 @@ abstract class StateMachine {
 		return $this->log;
 	}
 
-	protected function valid_transition()
+	protected function valid_transition($current_state, $new_state)
 	{
 		return $current_state->can_change_to($new_state)
 			OR $new_state->can_change_from($current_state);
@@ -54,7 +54,7 @@ abstract class StateMachine {
 		$new_state     = $this->state($new_state);
 		$current_state = $this->current();
 		
-		if ( ! $this->valid_transition())
+		if ( ! $this->valid_transition($current_state, $new_state))
 		{
 			throw new InvalidStateTransitionException;
 		}
