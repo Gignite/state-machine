@@ -1,6 +1,6 @@
 <?php
 /**
- * Specification for Gignite\StateMachine\StateMachine
+ * A human state machine
  * 
  * @package     StateMachine
  * @category    StateMachine
