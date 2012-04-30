@@ -56,7 +56,7 @@ abstract class StateMachine {
 		
 		if ( ! $this->valid_transition())
 		{
-			throw new InvalidStateChangeException;
+			throw new InvalidStateTransitionException;
 		}
 
 		$this->state = $new_state->name();
