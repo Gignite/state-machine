@@ -7,15 +7,9 @@
  * @author      Luke Morton
  * @copyright   Gignite, 2012
  */
-
 define('ROOT_PATH', realpath(__DIR__.'/../../').'/');
 require(ROOT_PATH.'test/unit/Gignite/Util/TestDox/ResultPrinter/Text.php');
 
-/**
- * PSR-0 Compatible autoloader
- *
- * @param string $class
- */
 spl_autoload_register(function ($class)
 {
 	$class = ltrim($class, '\\');

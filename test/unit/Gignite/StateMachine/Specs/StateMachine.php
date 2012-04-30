@@ -5,6 +5,7 @@ namespace Gignite\StateMachine\Specs;
  * 
  * @package     StateMachine
  * @category    StateMachine
+ * @category    Specs
  * @category    Test
  * @author      Luke Morton
  * @copyright   Gignite, 2012

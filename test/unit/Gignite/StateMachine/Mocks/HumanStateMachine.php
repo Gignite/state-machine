@@ -1,4 +1,14 @@
 <?php
+/**
+ * Specification for Gignite\StateMachine\StateMachine
+ * 
+ * @package     StateMachine
+ * @category    StateMachine
+ * @category    Mocks
+ * @category    Test
+ * @author      Luke Morton
+ * @copyright   Gignite, 2012
+ */
 namespace Gignite\StateMachine\Mocks;
 
 use Gignite\StateMachine\State;

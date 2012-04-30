@@ -1,4 +1,12 @@
 <?php
+/**
+ * A finite state machine
+ * 
+ * @package     StateMachine
+ * @category    StateMachine
+ * @author      Luke Morton
+ * @copyright   Gignite, 2012
+ */
 namespace Gignite\StateMachine;
 
 abstract class StateMachine {

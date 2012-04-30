@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * A state of a state machine
+ * 
+ * @package     StateMachine
+ * @category    State
+ * @author      Luke Morton
+ * @copyright   Gignite, 2012
+ */
 namespace Gignite\StateMachine;
 
 class State {
