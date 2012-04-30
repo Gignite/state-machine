@@ -30,7 +30,7 @@ abstract class StateMachine {
 			}
 		}
 
-		throw new UnknownStateException;
+		throw new InvalidStateException;
 	}
 
 	protected function valid_transition($current_state, $new_state)
