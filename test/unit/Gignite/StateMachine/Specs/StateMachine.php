@@ -115,4 +115,10 @@ class StateMachine extends \PHPUnit_Framework_TestCase {
 		$stateMachine->update($updateState);
 	}
 
+	public function testItShouldUseFirstStateAsDefault()
+	{
+		$stateMachine = new \Gignite\StateMachine\Mocks\NoDefaultStateMachine;
+		$this->assertSame('default', $stateMachine->current()->name());
+	}
+
 }
