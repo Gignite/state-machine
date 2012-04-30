@@ -6,9 +6,9 @@ abstract class StateMachine {
 
 	protected $states;
 
-	protected $log;
-
 	protected $state;
+
+	protected $log = array();
 
 	protected function states()
 	{
@@ -59,7 +59,8 @@ abstract class StateMachine {
 			throw new InvalidStateTransitionException;
 		}
 
-		$this->state = $new_state->name();
+		$this->state = $name = $new_state->name();
+		$this->log[] = array(time(), $name);
 	}
 
 	public function assert($state)
