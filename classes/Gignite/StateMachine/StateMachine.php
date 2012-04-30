@@ -1,5 +1,4 @@
 <?php
-
 namespace Gignite\StateMachine;
 
 abstract class StateMachine {
@@ -24,9 +23,9 @@ abstract class StateMachine {
 	{
 		foreach ($this->states() as $_state)
 		{
-			if ($state->name() === $state)
+			if ($_state->name() === $state)
 			{
-				return $state;
+				return $_state;
 			}
 		}
 
@@ -36,11 +35,31 @@ abstract class StateMachine {
 	protected function valid_transition($current_state, $new_state)
 	{
 		return $current_state->can_change_to($new_state)
-			OR $new_state->can_change_from($current_state);
+			AND $new_state->can_change_from($current_state);
+	}
+
+	protected function start_state()
+	{
+		$states = $this->states();
+
+		foreach ($states as $_state)
+		{
+			if ($_state->is_start())
+			{
+				return $_state;
+			}
+		}
+
+		return $states[0];
 	}
 
 	public function current()
 	{
+		if ($this->state === NULL)
+		{
+			$this->state = $this->start_state()->name();
+		}
+
 		return $this->state($this->state);
 	}
 
