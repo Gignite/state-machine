@@ -16,6 +16,11 @@
 			<group>statemachine</group>
 		</include>
 	</groups>
+	<filter>
+		<blacklist>
+			<directory suffix=".php">test/unit/Gignite/Util</directory>
+		</blacklist>
+	</filter>
 	<logging>
 		<log
 			type="coverage-html"
