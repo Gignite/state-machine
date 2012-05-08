@@ -11,6 +11,6 @@ namespace Gignite\StateMachine;
 
 interface Stateful {
 	
-	protected function state(StateMachine $state_machine = NULL);
+	public function state(StateMachine $state_machine = NULL);
 
 }
